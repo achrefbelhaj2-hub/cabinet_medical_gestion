@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.MainController"
+            stylesheets="@style.css">
+    
+    <!-- En-tête avec gradient -->
+    <top>
+        <HBox styleClass="gradient-dark" style="-fx-padding: 18;" alignment="CENTER_LEFT">
+            <padding>
+                <Insets left="25"/>
+            </padding>
+            <Label text="🏥 Cabinet Médical" styleClass="text-white" 
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);"/>
+            
+            <Region HBox.hgrow="ALWAYS"/>
+            
+            <HBox spacing="15" alignment="CENTER">
+                <Label text="👤" style="-fx-font-size: 20px;"/>
+                <Label fx:id="userLabel" text="Non connecté" styleClass="text-white" 
+                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <Label text="●" style="-fx-text-fill: #2ecc71; -fx-font-size: 24px;"/>
+            </HBox>
+            <padding>
+                <Insets right="25"/>
+            </padding>
+        </HBox>
+    </top>
+    
+    <!-- Menu latéral -->
+    <left>
+        <VBox styleClass="nav-sidebar" style="-fx-pref-width: 240;">
+            <padding>
+                <Insets top="40" right="20" bottom="40" left="20"/>
+            </padding>
+            
+            <!-- Menu selon rôle -->
+            <VBox spacing="8">
+                <!-- ADMIN MENU -->
+                <VBox fx:id="adminMenu" spacing="8" visible="false" managed="false">
+                    <Label text="⚙️ Administration" style="-fx-text-fill: #95a5a6; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <Button text="👥 Patients" onAction="#handleLoadPatientManagement" styleClass="nav-item"/>
+                    <Button text="👨‍⚕️ Médecins" onAction="#handleLoadMedecinManagement" styleClass="nav-item"/>
+                    <Button text="📅 Rendez-vous" onAction="#handleLoadRendezVous" styleClass="nav-item"/>
+                    <Button text="💊 Ordonnances" onAction="#handleLoadOrdonnanceManagement" styleClass="nav-item"/>
+                    <Separator style="-fx-padding: 15 0 15 0;"/>
+                    <Button text="📊 Tableau de bord" onAction="#handleLoadAdminDashboard" styleClass="nav-item nav-item-active"/>
+                </VBox>
+                
+                <!-- PATIENT MENU -->
+                <VBox fx:id="patientMenu" spacing="8" visible="false" managed="false">
+                    <Label text="👤 Mon Espace" style="-fx-text-fill: #95a5a6; -fx-font-weight: bold; -fx-font-size: 16px;"/>
+                    <Button text="🏠 Accueil" onAction="#handleLoadPatientHome" styleClass="nav-item nav-item-active"/>
+                    <Button text="📄 Mon Profil" onAction="#handleLoadMyProfile" styleClass="nav-item"/>
+                    <Button text="📅 Mes RDV" onAction="#handleLoadMyRendezVous" styleClass="nav-item"/>
+                    <Button text="💊 Mes Ordonnances" onAction="#handleLoadMyOrdonnances" styleClass="nav-item"/>
+                </VBox>
+                
+                <!-- Séparateur -->
+                <Region style="-fx-pref-height: 30;"/>
+                
+                <!-- Menu commun -->
+                <Button text="🚪 Déconnexion" onAction="#handleLogout"
+                        styleClass="nav-item" style="-fx-background-color: linear-gradient(to right, #e74c3c, #c0392b); -fx-text-fill: white;"/>
+            </VBox>
+            
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <!-- Statut -->
+            <VBox spacing="5" alignment="CENTER" styleClass="card-glass" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <Label fx:id="statusLabel" text="✅ Système prêt" 
+                       style="-fx-text-fill: #2ecc71; -fx-font-size: 12px; -fx-font-weight: bold;"/>
+                <Label text="🏥 V1.0.0" style="-fx-text-fill: #95a5a6; -fx-font-size: 10px;"/>
+            </VBox>
+            
+        </VBox>
+    </left>
+    
+    <!-- Zone de contenu principale -->
+    <center>
+        <StackPane fx:id="mainContentArea" styleClass="bg-pattern-medical">
+            <padding>
+                <Insets top="20" right="25" bottom="20" left="25"/>
+            </padding>
+        </StackPane>
+    </center>
+    
+</BorderPane>

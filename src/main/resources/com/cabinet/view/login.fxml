@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.LoginController"
+            stylesheets="@style.css">
+    
+    <center>
+        <VBox alignment="CENTER" spacing="20" styleClass="gradient-primary" style="-fx-background-color: linear-gradient(135deg, #3498db, #2c3e50);">
+            <padding>
+                <Insets top="50" right="50" bottom="50" left="50"/>
+            </padding>
+            
+            <VBox alignment="CENTER" spacing="10" styleClass="card-glass" style="-fx-pref-width: 500; -fx-background-radius: 20;">
+                <padding>
+                    <Insets top="40" right="40" bottom="40" left="40"/>
+                </padding>
+                
+                <Label text="🏥" style="-fx-font-size: 48px;"/>
+                <Label text="Cabinet Médical" styleClass="label-title" style="-fx-font-size: 32px; -fx-text-fill: #2c3e50;"/>
+                <Label text="Portail de connexion sécurisé" styleClass="label-muted" style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;"/>
+            </VBox>
+            
+            <VBox spacing="20" styleClass="card-glass" style="-fx-pref-width: 450; -fx-background-radius: 20;">
+                <padding>
+                    <Insets top="40" right="40" bottom="40" left="40"/>
+                </padding>
+                
+                <Label text="🔐 Connexion" styleClass="label-subtitle" style="-fx-font-size: 24px; -fx-text-fill: #2c3e50;"/>
+                <Separator style="-fx-padding: 10 0 10 0;"/>
+                
+                <VBox spacing="15">
+                    <Label text="👤 Identifiant:" style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                    <TextField fx:id="loginField" promptText="Entrez votre login" 
+                              styleClass="field-medical" style="-fx-pref-width: 100%; -fx-font-size: 14px;"/>
+                </VBox>
+                
+                <VBox spacing="15">
+                    <Label text="🔒 Mot de passe:" style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                    <PasswordField fx:id="passwordField" promptText="Entrez votre mot de passe" 
+                                  styleClass="field-medical" style="-fx-pref-width: 100%; -fx-font-size: 14px;"/>
+                </VBox>
+                
+                <HBox spacing="15" alignment="CENTER">
+                    <padding>
+                        <Insets top="30"/>
+                    </padding>
+                    
+                    <Button text="🚀 Se connecter" onAction="#handleLogin" 
+                            styleClass="button-gradient-success button-large glow-success" style="-fx-pref-width: 180;"/>
+                    
+                    <Button text="📝 S'inscrire" onAction="#handleSwitchToSignup"
+                            styleClass="button-gradient-info button-large" style="-fx-pref-width: 180;"/>
+                </HBox>
+                
+            </VBox>
+            
+            <Label text="🏥 © Cabinet Médical 2025 - Sécurité médicale certifiée" 
+                   styleClass="text-white" style="-fx-font-size: 12px; -fx-opacity: 0.8;"/>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>

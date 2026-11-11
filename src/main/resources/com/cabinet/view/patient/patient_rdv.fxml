@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.patient.PatientRdvController"
+            stylesheets="@style.css">
+    
+    <center>
+        <VBox spacing="25" styleClass="bg-pattern-medical">
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+            
+            <!-- Titre -->
+            <VBox alignment="CENTER" spacing="10" styleClass="card-glass" style="-fx-pref-width: 600; -fx-background-radius: 20;">
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <Label text="📅 Mes Rendez-vous" styleClass="label-title" style="-fx-font-size: 28px;"/>
+                <Label text="Gérez vos consultations médicales" styleClass="label-muted" style="-fx-font-size: 16px;"/>
+            </VBox>
+            
+            <!-- Filtres -->
+            <HBox spacing="20" alignment="CENTER_LEFT" styleClass="card" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="🔍 Filtrer par statut:" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                
+                <RadioButton fx:id="radioTous" text="Tous" 
+                           style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                <RadioButton fx:id="radioPlanifies" text="📅 Planifiés" 
+                           style="-fx-text-fill: #3498db; -fx-font-weight: bold;"/>
+                <RadioButton fx:id="radioTermines" text="✅ Terminés" 
+                           style="-fx-text-fill: #2ecc71; -fx-font-weight: bold;"/>
+                <RadioButton fx:id="radioAnnules" text="❌ Annulés" 
+                           style="-fx-text-fill: #e74c3c; -fx-font-weight: bold;"/>
+                
+                <Region HBox.hgrow="ALWAYS"/>
+                
+                <Button fx:id="btnRefresh" text="🔄 Actualiser" styleClass="button-gradient-primary button-large"/>
+            </HBox>
+            
+            <!-- Tableau des RDV -->
+            <VBox styleClass="card" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <TableView fx:id="rdvTable" style="-fx-pref-height: 350;">
+                    <columns>
+                        <TableColumn fx:id="dateHeureColumn" text="📅 Date & Heure" prefWidth="180"/>
+                        <TableColumn fx:id="motifColumn" text="📝 Motif" prefWidth="300"/>
+                        <TableColumn fx:id="statutColumn" text="🏷️ Statut" prefWidth="120"/>
+                        <TableColumn fx:id="medecinColumn" text="👨‍⚕️ Médecin" prefWidth="200"/>
+                        <TableColumn fx:id="actionsColumn" text="Actions" prefWidth="100"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <!-- Détails du RDV sélectionné -->
+            <VBox styleClass="card-primary" spacing="15" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="🔍" style="-fx-font-size: 24px;"/>
+                    <Label text="Détails du Rendez-vous Sélectionné" styleClass="label-section"/>
+                </HBox>
+                
+                <GridPane hgap="20" vgap="15">
+                    <Label text="📅 Date:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="detailDateLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="0" 
+                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #3498db;"/>
+                    
+                    <Label text="⏰ Heure:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="detailHeureLabel" text="-" GridPane.columnIndex="3" GridPane.rowIndex="0" 
+                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #3498db;"/>
+                    
+                    <Label text="👨‍⚕️ Médecin:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="detailMedecinLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.columnSpan="3" 
+                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #9b59b6;"/>
+                    
+                    <Label text="📝 Motif:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="detailMotifLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.columnSpan="3" 
+                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #2c3e50;"/>
+                    
+                    <Label text="🏷️ Statut:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                    <Label fx:id="detailStatutLabel" text="-" GridPane.columnIndex="1" GridPane.rowIndex="3" 
+                           style="-fx-font-weight: bold; -fx-font-size: 16px; -fx-text-fill: #2ecc71;"/>
+                </GridPane>
+            </VBox>
+            
+            <!-- Actions -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="btnTakeNewRdv" text="📅 Prendre un nouveau RDV" 
+                        styleClass="button-gradient-success button-large glow-success"/>
+                <Button fx:id="btnContactCabinet" text="📞 Contacter le cabinet" 
+                        styleClass="button-gradient-primary button-large glow-effect"/>
+                <Button fx:id="btnModifyRdv" text="✏️ Modifier ce RDV" 
+                        styleClass="button-gradient-warning button-large glow-warning"/>
+                <Button fx:id="btnCancelRdv" text="🗑️ Annuler ce RDV" 
+                        styleClass="button-gradient-danger button-large glow-danger"/>
+            </HBox>
+            
+            <!-- Statistiques -->
+            <HBox spacing="30" alignment="CENTER">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                <VBox alignment="CENTER" spacing="5" styleClass="stats-card stats-card-primary">
+                    <padding>
+                        <Insets top="25" right="25" bottom="25" left="25"/>
+                    </padding>
+                    <Label text="📅 Total RDV" style="-fx-text-fill: #3498db; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Label fx:id="statsTotalLabel" text="0" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: #3498db;"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" spacing="5" styleClass="stats-card stats-card-info">
+                    <padding>
+                        <Insets top="25" right="25" bottom="25" left="25"/>
+                    </padding>
+                    <Label text="📅 RDV planifiés" style="-fx-text-fill: #3498db; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Label fx:id="statsPlanifiesLabel" text="0" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: #3498db;"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" spacing="5" styleClass="stats-card stats-card-success">
+                    <padding>
+                        <Insets top="25" right="25" bottom="25" left="25"/>
+                    </padding>
+                    <Label text="✅ RDV terminés" style="-fx-text-fill: #2ecc71; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Label fx:id="statsTerminesLabel" text="0" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: #2ecc71;"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" spacing="5" styleClass="stats-card stats-card-danger">
+                    <padding>
+                        <Insets top="25" right="25" bottom="25" left="25"/>
+                    </padding>
+                    <Label text="❌ RDV annulés" style="-fx-text-fill: #e74c3c; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+                    <Label fx:id="statsAnnulesLabel" text="0" style="-fx-font-size: 42px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;"/>
+                </VBox>
+            </HBox>
+            
+            <!-- Prochain RDV -->
+            <HBox styleClass="card-glass" spacing="15" style="-fx-pref-width: 600; -fx-background-radius: 15;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="📅 Prochain RDV:" style="-fx-font-weight: bold; -fx-font-size: 18px;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Label fx:id="nextRdvLabel" text="Aucun RDV à venir" 
+                       style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #3498db;"/>
+            </HBox>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.admin.MedecinController"
+            stylesheets="@style.css">
+    
+    <center>
+        <VBox spacing="25">
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+            
+            <!-- Titre -->
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="slide-up">
+                <Label text="👨‍⚕️" style="-fx-font-size: 32px;"/>
+                <VBox spacing="5">
+                    <Label text="Gestion des Médecins" styleClass="label-title"/>
+                    <Label fx:id="countLabel" text="0 médecins" styleClass="label-muted" style="-fx-font-size: 14px;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnFermer" text="✕ Fermer" onAction="#handleFermer" 
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8 15;"/>
+            </HBox>
+            
+            <!-- Barre de recherche -->
+            <HBox spacing="15" alignment="CENTER_LEFT" styleClass="card-glass" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="🔍 Rechercher:" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <TextField fx:id="searchField" promptText="Nom du médecin..." 
+                          styleClass="field-medical" style="-fx-pref-width: 350px; -fx-font-size: 14px;"/>
+                <Button text="🔎 Rechercher" onAction="#handleSearchMedecin" styleClass="button-gradient-primary button-large"/>
+                <Button text="🔄 Tout afficher" onAction="#handleRefresh" styleClass="button-outline-primary button-large"/>
+            </HBox>
+            
+            <!-- Tableau -->
+            <VBox styleClass="card" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <TableView fx:id="medecinTable" style="-fx-pref-height: 300;">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="80" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="nomColumn" text="Nom" prefWidth="150"/>
+                        <TableColumn fx:id="prenomColumn" text="Prénom" prefWidth="150"/>
+                        <TableColumn fx:id="specialiteColumn" text="🎯 Spécialité" prefWidth="180"/>
+                        <TableColumn fx:id="licenceColumn" text="📋 Licence" prefWidth="150"/>
+                        <TableColumn fx:id="telephoneColumn" text="📞 Téléphone" prefWidth="140"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <!-- Formulaire -->
+            <VBox styleClass="card-info" spacing="20" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="📄" style="-fx-font-size: 24px;"/>
+                    <Label text="Détails Médecin" styleClass="label-section"/>
+                </HBox>
+                
+                <GridPane hgap="20" vgap="15">
+                    <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Prénom:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="prenomField" GridPane.columnIndex="3" GridPane.rowIndex="0" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Date Naissance:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <DatePicker fx:id="dateNaissancePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" 
+                               styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Spécialité*:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="specialiteField" GridPane.columnIndex="3" GridPane.rowIndex="1" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Licence*:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="licenceField" GridPane.columnIndex="1" GridPane.rowIndex="2" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Adresse:" GridPane.columnIndex="2" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="adresseField" GridPane.columnIndex="3" GridPane.rowIndex="2" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Téléphone:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="telephoneField" GridPane.columnIndex="1" GridPane.rowIndex="3" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                </GridPane>
+                
+                <!-- Boutons -->
+                <HBox spacing="15" alignment="CENTER" styleClass="spacing-md">
+                    <padding>
+                        <Insets top="25"/>
+                    </padding>
+                    <Button text="➕ Ajouter" onAction="#handleAddMedecin" 
+                            styleClass="button-gradient-success button-large glow-success"/>
+                    <Button text="✏️ Modifier" onAction="#handleUpdateMedecin" 
+                            styleClass="button-gradient-warning button-large glow-warning"/>
+                    <Button text="🗑️ Supprimer" onAction="#handleDeleteMedecin" 
+                            styleClass="button-gradient-danger button-large glow-danger"/>
+                    <Button text="🧹 Effacer" onAction="#clearFields" 
+                            styleClass="button-outline-info button-large"/>
+                </HBox>
+                
+                <HBox alignment="CENTER" styleClass="alert-danger" style="-fx-background-radius: 10;">
+                    <padding>
+                        <Insets top="15" right="15" bottom="15" left="15"/>
+                    </padding>
+                    <Label text="⚠️ * Champs obligatoires" style="-fx-text-fill: #e74c3c; -fx-font-weight: bold;"/>
+                </HBox>
+            </VBox>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>

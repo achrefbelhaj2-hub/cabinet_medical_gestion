@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.patient.PatientOrdonnanceController"
+            stylesheets="@style.css">
+    
+    <center>
+        <VBox spacing="25" styleClass="bg-pattern-medical">
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+            
+            <!-- Titre -->
+            <VBox alignment="CENTER" spacing="10" styleClass="card-glass" style="-fx-pref-width: 600; -fx-background-radius: 20;">
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <Label text="💊 Mes Ordonnances" styleClass="label-title" style="-fx-font-size: 28px;"/>
+                <Label text="Consultez vos prescriptions médicales" styleClass="label-muted" style="-fx-font-size: 16px;"/>
+            </VBox>
+            
+            <!-- Filtres -->
+            <HBox spacing="20" alignment="CENTER_LEFT" styleClass="card" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="🔍 Période:" style="-fx-font-weight: bold; -fx-font-size: 16px;"/>
+                
+                <ComboBox fx:id="periodeComboBox" promptText="Toutes les périodes" 
+                         styleClass="field-medical" prefWidth="180"/>
+                <Label text="👨‍⚕️ Médecin:" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="medecinComboBox" promptText="Tous les médecins" 
+                         styleClass="field-medical" prefWidth="220"/>
+                
+                <Region HBox.hgrow="ALWAYS"/>
+                
+                <Button fx:id="btnActualiser" text="🔄 Actualiser" styleClass="button-gradient-success button-large"/>
+            </HBox>
+            
+            <!-- Tableau des ordonnances -->
+            <VBox styleClass="card" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <TableView fx:id="ordonnanceTable" style="-fx-pref-height: 350;">
+                    <columns>
+                        <TableColumn fx:id="dateColumn" text="📅 Date" prefWidth="120"/>
+                        <TableColumn fx:id="contenuColumn" text="📋 Contenu" prefWidth="450"/>
+                        <TableColumn fx:id="medecinColumn" text="👨‍⚕️ Médecin" prefWidth="200"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <!-- Détails de l'ordonnance sélectionnée -->
+            <VBox styleClass="card-teal" spacing="20" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="30" right="30" bottom="30" left="30"/>
+                </padding>
+                
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <Label text="📋" style="-fx-font-size: 32px;"/>
+                    <VBox spacing="5">
+                        <Label fx:id="detailTitreLabel" text="Ordonnance" styleClass="label-subtitle" style="-fx-font-size: 20px;"/>
+                        <Label fx:id="detailInfoLabel" text="Sélectionnez une ordonnance" styleClass="label-muted"/>
+                    </VBox>
+                    
+                    <Region HBox.hgrow="ALWAYS"/>
+                    
+                    <VBox alignment="CENTER_RIGHT" spacing="5">
+                        <Label text="STATUS:" styleClass="label-muted"/>
+                        <Label fx:id="detailStatutLabel" text="-" 
+                               style="-fx-padding: 5 15; -fx-border-radius: 15; -fx-background-radius: 15; -fx-font-weight: bold;"/>
+                    </VBox>
+                </HBox>
+                
+                <Separator style="-fx-padding: 15 0 15 0;"/>
+                
+                <!-- Contenu de l'ordonnance -->
+                <VBox spacing="15">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="📄" style="-fx-font-size: 20px;"/>
+                        <Label text="Contenu:" styleClass="label-section"/>
+                    </HBox>
+                    <TextArea fx:id="detailContenuText" wrapText="true" editable="false" 
+                             styleClass="field-medical" style="-fx-pref-height: 180; -fx-font-size: 14px;"/>
+                </VBox>
+                
+                <!-- Instructions -->
+                <VBox spacing="15">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="💡" style="-fx-font-size: 20px;"/>
+                        <Label text="Instructions:" styleClass="label-section"/>
+                    </HBox>
+                    <TextArea fx:id="detailInstructionsText" wrapText="true" editable="false" 
+                             style="-fx-background-color: #fffde7; -fx-border-color: #f39c12; -fx-border-width: 2px; -fx-border-radius: 10px; -fx-pref-height: 100; -fx-font-size: 14px;"/>
+                </VBox>
+                
+                <!-- Signature -->
+                <HBox alignment="CENTER_RIGHT">
+                    <VBox alignment="CENTER_RIGHT" spacing="10" styleClass="card-glass" style="-fx-pref-width: 400;">
+                        <padding>
+                            <Insets top="15" right="15" bottom="15" left="15"/>
+                        </padding>
+                        <Label text="✍️ Signature et cachet du médecin:" 
+                               style="-fx-font-style: italic; -fx-text-fill: #7f8c8d; -fx-font-size: 14px;"/>
+                        <Label fx:id="detailMedecinLabel" text="-" 
+                               style="-fx-font-weight: bold; -fx-font-size: 18px; -fx-text-fill: #1abc9c;"/>
+                        <Label fx:id="detailSpecialiteLabel" text="-" 
+                               style="-fx-font-size: 14px; -fx-text-fill: #7f8c8d;"/>
+                    </VBox>
+                </HBox>
+            </VBox>
+            
+            <!-- Actions -->
+            <HBox spacing="20" alignment="CENTER">
+                <Button fx:id="btnDownloadPDF" text="📄 Télécharger PDF" 
+                        styleClass="button-gradient-primary button-large glow-effect"/>
+                <Button fx:id="btnPrint" text="🖨️ Imprimer" 
+                        styleClass="button-gradient-teal button-large"/>
+            </HBox>
+            
+            <!-- Information -->
+            <HBox styleClass="alert-box" spacing="15" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <Label text="💡" style="-fx-font-size: 32px;"/>
+                <VBox spacing="10">
+                    <Label text="📌 Information importante:" 
+                           style="-fx-font-weight: bold; -fx-text-fill: #3498db; -fx-font-size: 18px;"/>
+                    <Label text="• Les ordonnances sont valables 3 mois à partir de la date de prescription.\n• Présentez cette ordonnance à votre pharmacie pour obtenir vos médicaments.\n• Conservez vos ordonnances pour votre suivi médical.\n• En cas d'effets secondaires, contactez immédiatement votre médecin." 
+                           style="-fx-text-fill: #2c3e50; -fx-wrap-text: true; -fx-font-size: 14px;"/>
+                </VBox>
+            </HBox>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>

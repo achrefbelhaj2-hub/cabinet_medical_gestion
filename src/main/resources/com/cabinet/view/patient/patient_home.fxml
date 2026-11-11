@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.patient.PatientDashboardController"
+            stylesheets="@style.css">
+    
+    <!-- Menu latéral -->
+    <left>
+        <VBox styleClass="nav-sidebar" style="-fx-pref-width: 260;">
+            <padding>
+                <Insets top="50" right="25" bottom="50" left="25"/>
+            </padding>
+            
+            <!-- Bienvenue -->
+            <VBox alignment="CENTER" spacing="15" style="-fx-padding: 0 0 40 0;">
+                <VBox alignment="CENTER" styleClass="patient-avatar" style="-fx-min-width: 100; -fx-min-height: 100;">
+                    <Label text="👤" style="-fx-font-size: 48px;"/>
+                </VBox>
+                <VBox alignment="CENTER" spacing="5">
+                    <Label fx:id="welcomeLabel" text="Bienvenue" 
+                           style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold; -fx-wrap-text: true;"/>
+                    <Label text="Espace Patient" 
+                           style="-fx-text-fill: rgba(255,255,255,0.8); -fx-font-size: 14px;"/>
+                </VBox>
+            </VBox>
+            
+            <!-- Menu -->
+            <VBox spacing="8">
+                <Button fx:id="btnDashboard" text="🏠 Tableau de bord" styleClass="nav-item nav-item-active"/>
+                <Button fx:id="btnProfil" text="📄 Mon Profil" styleClass="nav-item"/>
+                <Button fx:id="btnRendezVous" text="📅 Mes Rendez-vous" styleClass="nav-item"/>
+                <Button fx:id="btnOrdonnances" text="💊 Mes Ordonnances" styleClass="nav-item"/>
+                
+                <!-- Séparateur -->
+                <Region style="-fx-pref-height: 40;"/>
+                
+                <Button fx:id="btnDeconnexion" text="🚪 Déconnexion" styleClass="nav-item" 
+                        style="-fx-background-color: linear-gradient(to right, #e74c3c, #c0392b); -fx-text-fill: white;"/>
+            </VBox>
+            
+            <!-- Version -->
+            <Region VBox.vgrow="ALWAYS"/>
+            <VBox alignment="CENTER" spacing="5">
+                <Label text="🏥 Version 1.0.0" style="-fx-text-fill: #95a5a6; -fx-font-size: 12px;"/>
+                <Label text="Cabinet Médical © 2025" style="-fx-text-fill: #95a5a6; -fx-font-size: 10px;"/>
+            </VBox>
+        </VBox>
+    </left>
+    
+    <!-- Contenu principal -->
+    <center>
+        <VBox alignment="CENTER" spacing="40" styleClass="bg-pattern-medical">
+            <padding>
+                <Insets top="60" right="60" bottom="60" left="60"/>
+            </padding>
+            
+            <!-- Statistiques -->
+            <HBox spacing="40" alignment="CENTER" styleClass="slide-up">
+                <VBox alignment="CENTER" spacing="15" styleClass="stats-card stats-card-primary" style="-fx-pref-width: 320;">
+                    <padding>
+                        <Insets top="30" right="30" bottom="30" left="30"/>
+                    </padding>
+                    <Label text="📅 Prochain RDV" styleClass="label-muted" style="-fx-font-size: 16px;"/>
+                    <Label fx:id="nextRdvLabel" text="Chargement..." styleClass="label-subtitle" 
+                           style="-fx-font-size: 24px; -fx-wrap-text: true; -fx-text-alignment: center;"/>
+                    <Label text="Prochaine consultation" styleClass="label-muted" style="-fx-font-size: 14px;"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" spacing="15" styleClass="stats-card stats-card-success" style="-fx-pref-width: 320;">
+                    <padding>
+                        <Insets top="30" right="30" bottom="30" left="30"/>
+                    </padding>
+                    <Label text="📊 RDV Total" styleClass="label-muted" style="-fx-font-size: 16px;"/>
+                    <Label fx:id="rdvCountLabel" text="0" styleClass="label-subtitle" style="-fx-font-size: 36px;"/>
+                    <Label text="Consultations suivies" styleClass="label-muted" style="-fx-font-size: 14px;"/>
+                </VBox>
+            </HBox>
+            
+            <!-- Actions rapides -->
+            <GridPane hgap="25" vgap="25" alignment="CENTER" styleClass="slide-up">
+                <padding>
+                    <Insets top="20"/>
+                </padding>
+                
+                <Button fx:id="btnPrendreRdv" text="📅 Prendre un RDV" 
+                        styleClass="button-gradient-primary button-large glow-effect"/>
+                <Button fx:id="btnVoirOrdonnances" text="💊 Voir mes ordonnances" GridPane.columnIndex="1" 
+                        styleClass="button-gradient-success button-large glow-success"/>
+                <Button fx:id="btnModifierProfil" text="✏️ Modifier mon profil" GridPane.rowIndex="1" 
+                        styleClass="button-gradient-warning button-large glow-warning"/>
+                <Button fx:id="btnContacterCabinet" text="📞 Contacter le cabinet" GridPane.columnIndex="1" GridPane.rowIndex="1" 
+                        styleClass="button-gradient-teal button-large glow-effect"/>
+            </GridPane>
+            
+            <!-- Message de bienvenue -->
+            <VBox alignment="CENTER" spacing="15" styleClass="card-glass" style="-fx-pref-width: 800; -fx-background-radius: 20;">
+                <padding>
+                    <Insets top="40" right="40" bottom="40" left="40"/>
+                </padding>
+                <HBox alignment="CENTER" spacing="15">
+                    <Button text="🔄 Actualiser" styleClass="button-outline-primary" onAction="#handleRefresh"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                    <Label text="👋 Bienvenue sur votre espace patient" styleClass="label-subtitle" style="-fx-font-size: 24px;"/>
+                    <Region HBox.hgrow="ALWAYS"/>
+                </HBox>
+                <Label text="Gérez facilement vos rendez-vous, ordonnances et informations personnelles" 
+                       styleClass="label-muted" style="-fx-font-size: 16px; -fx-text-alignment: center;"/>
+                <Separator style="-fx-padding: 20 0 20 0;"/>
+                <VBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 20 0 20;">
+                    <Label text="💡 Conseil: Planifiez vos rendez-vous à l'avance pour garantir une disponibilité optimale." 
+                           style="-fx-text-fill: #3498db; -fx-font-style: italic; -fx-font-size: 14px;"/>
+                    <Label text="📋 Votre dossier médical est à jour et accessible dans votre profil." 
+                           style="-fx-text-fill: #2ecc71; -fx-font-style: italic; -fx-font-size: 14px;"/>
+                    <Label text="🔒 Vos données médicales sont sécurisées et confidentielles." 
+                           style="-fx-text-fill: #9b59b6; -fx-font-style: italic; -fx-font-size: 14px;"/>
+                </VBox>
+            </VBox>
+            
+        </VBox>
+    </center>
+    
+    <!-- En-tête -->
+    <top>
+        <HBox styleClass="gradient-primary" style="-fx-padding: 20;" alignment="CENTER">
+            <Label text="🏥 Espace Patient - Cabinet Médical" styleClass="text-white" 
+                   style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 3, 0, 0, 1);"/>
+        </HBox>
+    </top>
+    
+</BorderPane>

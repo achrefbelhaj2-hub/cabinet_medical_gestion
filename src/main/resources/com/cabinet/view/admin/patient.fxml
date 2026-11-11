@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.admin.PatientController"
+            stylesheets="@style.css">
+    
+    <center>
+        <VBox spacing="25">
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+            
+            <!-- Titre -->
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="slide-up">
+                <Label text="👥" style="-fx-font-size: 32px;"/>
+                <VBox spacing="5">
+                    <Label text="Gestion des Patients" styleClass="label-title"/>
+                    <Label fx:id="countLabel" text="0 patients" styleClass="label-muted" style="-fx-font-size: 14px;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnFermer" text="✕ Fermer" onAction="#handleFermer" 
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8 15;"/>
+            </HBox>
+            
+            <HBox spacing="15" alignment="CENTER_LEFT" styleClass="card-glass" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="🔍 Rechercher:" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <TextField fx:id="searchField" promptText="Nom du patient..." 
+                          styleClass="field-medical" style="-fx-pref-width: 350px; -fx-font-size: 14px;"/>
+                <Button text="🔎 Rechercher" onAction="#handleSearchPatient" styleClass="button-gradient-primary button-large"/>
+                <Button text="🔄 Tout afficher" onAction="#handleRefresh" styleClass="button-outline-primary button-large"/>
+            </HBox>
+            
+            <VBox styleClass="card" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <TableView fx:id="patientTable" style="-fx-pref-height: 300;">
+                    <columns>
+                        <TableColumn fx:id="idColumn" text="ID" prefWidth="80" style="-fx-alignment: CENTER;"/>
+                        <TableColumn fx:id="nomColumn" text="Nom" prefWidth="150"/>
+                        <TableColumn fx:id="prenomColumn" text="Prénom" prefWidth="150"/>
+                        <TableColumn fx:id="dateNaissanceColumn" text="Date Naissance" prefWidth="150"/>
+                        <TableColumn fx:id="telephoneColumn" text="📞 Téléphone" prefWidth="140"/>
+                        <TableColumn fx:id="mutuelleColumn" text="🏥 Mutuelle" prefWidth="150"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <VBox styleClass="card-primary" spacing="20" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="📄" style="-fx-font-size: 24px;"/>
+                    <Label text="Détails Patient" styleClass="label-section"/>
+                </HBox>
+                
+                <GridPane hgap="20" vgap="15">
+                    <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Prénom:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="prenomField" GridPane.columnIndex="3" GridPane.rowIndex="0" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Date Naissance:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <DatePicker fx:id="dateNaissancePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" 
+                               styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Téléphone:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="telephoneField" GridPane.columnIndex="3" GridPane.rowIndex="1" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="Adresse:" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="2" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="adresseField" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="4" 
+                              styleClass="field-medical" style="-fx-pref-width: 600;"/>
+                    
+                    <Label text="Dossier Médical:" GridPane.columnIndex="0" GridPane.rowIndex="4" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="dossierMedicalField" GridPane.columnIndex="1" GridPane.rowIndex="4" GridPane.columnSpan="3"
+                              styleClass="field-medical" style="-fx-pref-width: 450;"/>
+                    
+                    <Label text="Mutuelle:" GridPane.columnIndex="0" GridPane.rowIndex="5" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="mutuelleField" GridPane.columnIndex="1" GridPane.rowIndex="5" 
+                              styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                </GridPane>
+                
+                <HBox spacing="15" alignment="CENTER" styleClass="spacing-md">
+                    <padding>
+                        <Insets top="25"/>
+                    </padding>
+                    <Button text="➕ Ajouter" onAction="#handleAddPatient" 
+                            styleClass="button-gradient-success button-large glow-success"/>
+                    <Button text="✏️ Modifier" onAction="#handleUpdatePatient" 
+                            styleClass="button-gradient-warning button-large glow-warning"/>
+                    <Button text="🗑️ Supprimer" onAction="#handleDeletePatient" 
+                            styleClass="button-gradient-danger button-large glow-danger"/>
+                    <Button text="🧹 Effacer" onAction="#clearFields" 
+                            styleClass="button-outline-primary button-large"/>
+                </HBox>
+            </VBox>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>

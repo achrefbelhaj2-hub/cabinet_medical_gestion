@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.SignupController"
+            stylesheets="@style.css">
+    
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background: transparent;">
+            <VBox alignment="CENTER" spacing="25" styleClass="gradient-teal" style="-fx-background-color: linear-gradient(135deg, #3498db, #2c3e50);">
+                <padding>
+                    <Insets top="40" right="40" bottom="40" left="40"/>
+                </padding>
+                
+                <!-- Titre -->
+                <VBox alignment="CENTER" spacing="10" styleClass="card-glass" style="-fx-pref-width: 600; -fx-background-radius: 20;">
+                    <padding>
+                        <Insets top="30" right="30" bottom="30" left="30"/>
+                    </padding>
+                    <Label text="📋" style="-fx-font-size: 48px;"/>
+                    <Label text="Inscription Patient" styleClass="label-title" style="-fx-text-fill: #2c3e50;"/>
+                    <Label text="Remplissez vos informations pour créer votre compte" styleClass="label-muted" style="-fx-text-fill: #7f8c8d;"/>
+                </VBox>
+                
+                <!-- Carte du formulaire -->
+                <VBox styleClass="card-glass" style="-fx-pref-width: 900; -fx-background-radius: 20;">
+                    <padding>
+                        <Insets top="40" right="40" bottom="40" left="40"/>
+                    </padding>
+                    
+                    <!-- Section Compte -->
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="👤" style="-fx-font-size: 24px; -fx-text-fill: #2c3e50;"/>
+                        <Label text="Informations de Compte" styleClass="label-section" style="-fx-text-fill: #2c3e50;"/>
+                    </HBox>
+                    
+                    <GridPane hgap="20" vgap="15">
+                        <padding>
+                            <Insets bottom="30"/>
+                        </padding>
+                        
+                        <Label text="Login*:" GridPane.columnIndex="0" GridPane.rowIndex="0" 
+                               style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                        <TextField fx:id="loginField" GridPane.columnIndex="1" GridPane.rowIndex="0" 
+                                  promptText="Choisissez un login" styleClass="field-medical" style="-fx-pref-width: 280;"/>
+                        
+                        <Label text="Mot de passe*:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                               style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                        <PasswordField fx:id="passwordField" GridPane.columnIndex="1" GridPane.rowIndex="1" 
+                                      promptText="Choisissez un mot de passe" styleClass="field-medical" style="-fx-pref-width: 280;"/>
+                        
+                        <Label text="Confirmer MDP*:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                               style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                        <PasswordField fx:id="confirmPasswordField" GridPane.columnIndex="1" GridPane.rowIndex="2" 
+                                      promptText="Confirmez le mot de passe" styleClass="field-medical" style="-fx-pref-width: 280;"/>
+                    </GridPane>
+                    
+                    <Separator style="-fx-padding: 20 0 20 0;"/>
+                    
+                    <!-- Section Patient -->
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Label text="📄" style="-fx-font-size: 24px; -fx-text-fill: #2c3e50;"/>
+                        <Label text="Informations Personnelles" styleClass="label-section" style="-fx-text-fill: #2c3e50;"/>
+                    </HBox>
+                    
+                    <GridPane hgap="20" vgap="15">
+                        <Label text="Nom*:" GridPane.columnIndex="0" GridPane.rowIndex="0"
+                               style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                        <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0" 
+                                  promptText="Votre nom" styleClass="field-medical" style="-fx-pref-width: 280;"/>
+                        
+                        <Label text="Prénom*:" GridPane.columnIndex="2" GridPane.rowIndex="0"
+                               style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                        <TextField fx:id="prenomField" GridPane.columnIndex="3" GridPane.rowIndex="0" 
+                                  promptText="Votre prénom" styleClass="field-medical" style="-fx-pref-width: 280;"/>
+                        
+                        <Label text="Date de naissance*:" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                               style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                        <DatePicker fx:id="dateNaissancePicker" GridPane.columnIndex="1" GridPane.rowIndex="1" 
+                                   styleClass="field-medical" style="-fx-pref-width: 280;"/>
+                        
+                        <Label text="Adresse:" GridPane.columnIndex="2" GridPane.rowIndex="1"
+                               style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                        <TextField fx:id="adresseField" GridPane.columnIndex="3" GridPane.rowIndex="1" 
+                                  promptText="Votre adresse" styleClass="field-medical" style="-fx-pref-width: 280;"/>
+                        
+                        <Label text="Téléphone:" GridPane.columnIndex="0" GridPane.rowIndex="2"
+                               style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                        <TextField fx:id="telephoneField" GridPane.columnIndex="1" GridPane.rowIndex="2" 
+                                  promptText="Votre téléphone" styleClass="field-medical" style="-fx-pref-width: 280;"/>
+                        
+                        <Label text="Mutuelle:" GridPane.columnIndex="2" GridPane.rowIndex="2"
+                               style="-fx-text-fill: #2c3e50; -fx-font-weight: bold;"/>
+                        <TextField fx:id="mutuelleField" GridPane.columnIndex="3" GridPane.rowIndex="2" 
+                                  promptText="Votre mutuelle" styleClass="field-medical" style="-fx-pref-width: 280;"/>
+                    </GridPane>
+                    
+                </VBox>
+                
+                <!-- Boutons -->
+                <HBox spacing="30" alignment="CENTER">
+                    <Button text="✅ S'inscrire" onAction="#handleSignup" 
+                            styleClass="button-gradient-success button-large glow-success" style="-fx-pref-width: 220;"/>
+                    
+                    <Button text="↩️ Retour" onAction="#handleSwitchToLogin"
+                            styleClass="button-outline-primary button-large" style="-fx-pref-width: 220;"/>
+                </HBox>
+                
+                <!-- Notes -->
+                <VBox spacing="10" alignment="CENTER" styleClass="alert-box" style="-fx-pref-width: 900;">
+                    <padding>
+                        <Insets top="20" right="20" bottom="20" left="20"/>
+                    </padding>
+                    <Label text="⚠️ * Champs obligatoires" style="-fx-text-fill: #e74c3c; -fx-font-weight: bold;"/>
+                    <Label text="👤 Déjà inscrit ? Connectez-vous" 
+                           style="-fx-text-fill: #3498db; -fx-font-weight: bold; -fx-cursor: hand;" 
+                           onMouseClicked="#handleSwitchToLogin"/>
+                </VBox>
+                
+            </VBox>
+        </ScrollPane>
+    </center>
+    
+</BorderPane>

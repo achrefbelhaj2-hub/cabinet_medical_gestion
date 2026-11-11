@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.admin.OrdonnanceController"
+            stylesheets="@style.css">
+    
+    <center>
+        <VBox spacing="25">
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+       
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="slide-up">
+                <Label text="💊" style="-fx-font-size: 32px;"/>
+                <Label text="Gestion des Ordonnances" styleClass="label-title"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnFermer" text="✕ Fermer" onAction="#handleFermer" 
+                    style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8 15;"/>
+            </HBox>
+            
+            <VBox styleClass="card" style="-fx-background-radius: 15;">
+              
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <TableView fx:id="ordonnanceTable" style="-fx-pref-height: 300;">
+                    <columns>
+                   
+                        <TableColumn fx:id="dateColumn" text="📅 Date Prescription" prefWidth="150"/>
+                        <TableColumn fx:id="contenuColumn" text="📋 Contenu Textuel" prefWidth="400"/>
+                        <TableColumn fx:id="patientColumn" text="👤 Patient" prefWidth="180"/>
+                        <TableColumn fx:id="medecinColumn" text="👨‍⚕️ Médecin" prefWidth="250"/>
+     
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <VBox styleClass="card-teal" spacing="20" style="-fx-background-radius: 15;">
+               
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="➕" style="-fx-font-size: 24px;"/>
+                  
+                    <Label text="Nouvelle Ordonnance" styleClass="label-section"/>
+                </HBox>
+                
+                <GridPane hgap="20" vgap="15">
+                    <Label text="Patient:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="patientComboBox" GridPane.columnIndex="1" GridPane.rowIndex="0" 
+                             styleClass="field-medical" prefWidth="280" promptText="Sélectionnez un patient"/>
+                    
+                
+                    <Label text="Médecin:" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="medecinComboBox" GridPane.columnIndex="3" GridPane.rowIndex="0" 
+                             styleClass="field-medical" prefWidth="320" promptText="Sélectionnez un médecin"/>
+                    
+              
+                    <Label text="Date Prescription:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <DatePicker fx:id="datePrescriptionPicker" GridPane.columnIndex="1" GridPane.rowIndex="1" 
+                               styleClass="field-medical" style="-fx-pref-width: 220;"/>
+      
+               
+                    <Label text="Contenu Textuel:" GridPane.columnIndex="0" GridPane.rowIndex="2" GridPane.columnSpan="4" style="-fx-font-weight: bold;"/>
+                    <TextArea fx:id="contenuTextArea" GridPane.columnIndex="0" GridPane.rowIndex="3" GridPane.columnSpan="4" 
+         
+                             prefHeight="120" prefWidth="600" promptText="Entrez le contenu détaillé de l'ordonnance..."
+                             styleClass="field-medical"/>
+                </GridPane>
+                
+            
+                <HBox spacing="15" alignment="CENTER" styleClass="spacing-md">
+                    <padding>
+                        <Insets top="25"/>
+                    </padding>
+          
+                    <Button text="💾 Créer" onAction="#handleCreerOrdonnance" 
+                            styleClass="button-gradient-teal button-large glow-effect"/>
+                    <Button text="🧹 Effacer" onAction="#handleClearFields"
+                            styleClass="button-outline-teal button-large"/>
+    
+                    <Button text="🗑️ Supprimer" onAction="#handleSupprimerOrdonnance"
+                            styleClass="button-gradient-danger button-large"/>
+                </HBox>
+            </VBox>
+            
+        </VBox>
+    
+    </center>
+    
+</BorderPane>

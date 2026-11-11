@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/11" 
+      xmlns:fx="http://javafx.com/fxml/1"
+      alignment="CENTER" 
+      spacing="30"
+      styleClass="gradient-primary"
+      style="-fx-padding: 50; -fx-background-color: linear-gradient(135deg, #3498db, #2c3e50);">
+    
+    <padding>
+        <Insets top="120" right="50" bottom="120" left="50"/>
+    </padding>
+    
+    <!-- Logo et titre -->
+    <VBox alignment="CENTER" spacing="15" styleClass="card-glass" style="-fx-pref-width: 700; -fx-background-radius: 25;">
+        <padding>
+            <Insets top="50" right="50" bottom="50" left="50"/>
+        </padding>
+        <Label text="🏥" style="-fx-font-size: 80px;"/>
+        <Label text="Bienvenue au Cabinet Médical" styleClass="label-title" style="-fx-font-size: 36px;"/>
+        <Label text="Système de gestion médicale intégré" styleClass="label-muted" style="-fx-font-size: 18px;"/>
+    </VBox>
+    
+    <!-- Instructions -->
+    <VBox spacing="20" alignment="CENTER" styleClass="card-glass" style="-fx-pref-width: 800; -fx-background-radius: 20;">
+        <padding>
+            <Insets top="40" right="40" bottom="40" left="40"/>
+        </padding>
+        <HBox alignment="CENTER" spacing="10">
+            <Label text="📋" style="-fx-font-size: 24px;"/>
+            <Label text="Instructions :" styleClass="label-section" style="-fx-font-size: 20px;"/>
+        </HBox>
+        
+        <GridPane hgap="30" vgap="15" alignment="CENTER">
+            <padding>
+                <Insets top="20"/>
+            </padding>
+            
+            <!-- Administrateur -->
+            <VBox alignment="CENTER" spacing="10" styleClass="stats-card stats-card-primary" style="-fx-pref-width: 220;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="⚙️" style="-fx-font-size: 32px;"/>
+                <Label text="Administrateur" style="-fx-font-weight: bold; -fx-text-fill: #3498db;"/>
+                <Label text="Gestion complète du cabinet" styleClass="label-muted" style="-fx-font-size: 12px; -fx-text-align: center;"/>
+            </VBox>
+            
+            <!-- Médecin -->
+            <VBox alignment="CENTER" spacing="10" styleClass="stats-card stats-card-info" style="-fx-pref-width: 220;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="👨‍⚕️" style="-fx-font-size: 32px;"/>
+                <Label text="Médecin" style="-fx-font-weight: bold; -fx-text-fill: #9b59b6;"/>
+                <Label text="Consultation des patients" styleClass="label-muted" style="-fx-font-size: 12px; -fx-text-align: center;"/>
+            </VBox>
+            
+            <!-- Patient -->
+            <VBox alignment="CENTER" spacing="10" styleClass="stats-card stats-card-success" style="-fx-pref-width: 220;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="👤" style="-fx-font-size: 32px;"/>
+                <Label text="Patient" style="-fx-font-weight: bold; -fx-text-fill: #2ecc71;"/>
+                <Label text="Prise de RDV et consultation" styleClass="label-muted" style="-fx-font-size: 12px; -fx-text-align: center;"/>
+            </VBox>
+        </GridPane>
+        
+        <!-- Bouton d'action -->
+        <Button text="🚀 Commencer →" styleClass="button-gradient-success button-large glow-success" 
+                style="-fx-font-size: 18px; -fx-pref-width: 250; -fx-padding: 15 30 15 30;">
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+        </Button>
+    </VBox>
+    
+    <!-- Footer -->
+    <VBox alignment="CENTER" spacing="10" styleClass="card-glass" style="-fx-pref-width: 600;">
+        <padding>
+            <Insets top="20" right="20" bottom="20" left="20"/>
+        </padding>
+        <Label text="🏥 Cabinet Médical © 2025 - Tous droits réservés" 
+               styleClass="text-white" style="-fx-font-size: 14px; -fx-opacity: 0.9;"/>
+        <Label text="Système sécurisé et conforme RGPD" 
+               styleClass="label-muted" style="-fx-font-size: 12px;"/>
+    </VBox>
+    
+</VBox>

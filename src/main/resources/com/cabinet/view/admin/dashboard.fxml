@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.admin.DashboardController"
+            stylesheets="@style.css">
+    
+    <center>
+        <VBox alignment="CENTER" spacing="30" styleClass="bg-pattern-medical">
+            <padding>
+                <Insets top="50" right="50" bottom="50" left="50"/>
+            </padding>
+            
+            <VBox alignment="CENTER" spacing="10" styleClass="fade-in">
+                <Label text="👨‍⚕️" style="-fx-font-size: 64px;"/>
+                <Label text="Tableau de Bord Administration" styleClass="label-title"/>
+                <Label text="Gestion du cabinet médical" styleClass="label-muted" style="-fx-font-size: 16px;"/>
+            </VBox>
+            
+            <HBox spacing="30" alignment="CENTER" styleClass="slide-up">
+                <VBox alignment="CENTER" spacing="10" styleClass="stats-card stats-card-primary" style="-fx-pref-width: 280;">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="👥 Patients" styleClass="label-muted" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="labelPatientsCount" text="0" styleClass="label-subtitle" style="-fx-font-size: 36px; -fx-text-fill: #3498db;"/>
+                    <Button fx:id="btnGestionPatients" text="Gérer" styleClass="button-gradient-primary button-large pulse"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" spacing="10" styleClass="stats-card stats-card-info" style="-fx-pref-width: 280;">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="👨‍⚕️ Médecins" styleClass="label-muted" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="labelMedecinsCount" text="0" styleClass="label-subtitle" style="-fx-font-size: 36px; -fx-text-fill: #9b59b6;"/>
+                    <Button fx:id="btnGestionMedecins" text="Gérer" styleClass="button-gradient-info button-large pulse"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" spacing="10" styleClass="stats-card stats-card-success" style="-fx-pref-width: 280;">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="📅 RDV aujourd'hui" styleClass="label-muted" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="labelRdvTodayCount" text="0" styleClass="label-subtitle" style="-fx-font-size: 36px; -fx-text-fill: #2ecc71;"/>
+                    <Button fx:id="btnVoirRdv" text="Voir" styleClass="button-gradient-success button-large pulse"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" spacing="10" styleClass="stats-card stats-card-warning" style="-fx-pref-width: 280;">
+                    <padding><Insets top="25" right="25" bottom="25" left="25"/></padding>
+                    <Label text="💊 Ordonnances" styleClass="label-muted" style="-fx-font-size: 14px;"/>
+                    <Label fx:id="labelOrdonnancesCount" text="0" styleClass="label-subtitle" style="-fx-font-size: 36px; -fx-text-fill: #e67e22;"/>
+                    <Button fx:id="btnVoirOrdonnances" text="Voir" styleClass="button-gradient-warning button-large pulse"/>
+                </VBox>
+            </HBox>
+            
+            <HBox spacing="40" alignment="CENTER" styleClass="slide-up">
+                <padding><Insets top="20"/></padding>
+                
+                <VBox alignment="CENTER" spacing="5">
+                    <Button fx:id="btnVoirStatistiques" text="📊 Voir statistiques" 
+                            styleClass="button-gradient-warning button-large glow-warning" 
+                            style="-fx-pref-width: 220;"/>
+                    <Label text="Afficher les statistiques détaillées" styleClass="label-muted" style="-fx-font-size: 12px;"/>
+                </VBox>
+                
+                <VBox alignment="CENTER" spacing="5">
+                    <Button text="🔄 Rafraîchir" 
+                            onAction="#handleRefresh"
+                            styleClass="button-gradient-teal button-large" 
+                            style="-fx-pref-width: 220;"/>
+                    <Label text="Actualiser les données" styleClass="label-muted" style="-fx-font-size: 12px;"/>
+                </VBox>
+            </HBox>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>

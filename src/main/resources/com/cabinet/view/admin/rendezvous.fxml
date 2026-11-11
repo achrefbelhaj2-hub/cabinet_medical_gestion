@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.cabinet.controller.admin.RendezVousController"
+            stylesheets="@style.css">
+    
+    <center>
+        <VBox spacing="25">
+            <padding>
+                <Insets top="25" right="25" bottom="25" left="25"/>
+            </padding>
+            
+            <HBox alignment="CENTER_LEFT" spacing="15" styleClass="slide-up">
+                <Label text="📅" style="-fx-font-size: 32px;"/>
+                <VBox spacing="5">
+                    <Label text="Gestion des Rendez-vous" styleClass="label-title"/>
+                    <Label fx:id="countLabel" text="0 rendez-vous" styleClass="label-muted" style="-fx-font-size: 14px;"/>
+                </VBox>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button fx:id="btnFermer" text="✕ Fermer" onAction="#handleFermer" 
+                style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-padding: 8 15;"/>
+            </HBox>
+            
+            <HBox spacing="15" alignment="CENTER_LEFT" styleClass="card-glass" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+                <Label text="🔍 Rechercher:" style="-fx-font-weight: bold; -fx-text-fill: #2c3e50;"/>
+                <TextField fx:id="searchField" promptText="Patient, médecin ou motif..." 
+                          styleClass="field-medical" style="-fx-pref-width: 350px; -fx-font-size: 14px;"/>
+                <Button text="🔎 Rechercher" onAction="#handleSearchRendezVous" styleClass="button-gradient-primary button-large"/>
+                <Button text="🔄 Tout afficher" onAction="#handleRefresh" styleClass="button-outline-primary button-large"/>
+            </HBox>
+            
+            <VBox styleClass="card" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="15" right="15" bottom="15" left="15"/>
+                </padding>
+                <TableView fx:id="rdvTable" style="-fx-pref-height: 300;">
+                    <columns>
+                        <TableColumn fx:id="dateHeureColumn" text="📅 Date/Heure" prefWidth="180"/>
+                        <TableColumn fx:id="motifColumn" text="📝 Motif" prefWidth="300"/>
+                        <TableColumn fx:id="statutColumn" text="🏷️ Statut" prefWidth="120"/>
+                        <TableColumn fx:id="patientColumn" text="👤 Patient" prefWidth="180"/>
+                        <TableColumn fx:id="medecinColumn" text="👨‍⚕️ Médecin" prefWidth="180"/>
+                    </columns>
+                </TableView>
+            </VBox>
+            
+            <VBox styleClass="card-warning" spacing="20" style="-fx-background-radius: 15;">
+                <padding>
+                    <Insets top="25" right="25" bottom="25" left="25"/>
+                </padding>
+                <HBox alignment="CENTER_LEFT" spacing="10">
+                    <Label text="➕" style="-fx-font-size: 24px;"/>
+                    <Label text="Nouveau Rendez-vous" styleClass="label-section"/>
+                </HBox>
+                
+                <GridPane hgap="20" vgap="15">
+                    <Label text="📅 Date:" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <DatePicker fx:id="dateRdvPicker" GridPane.columnIndex="1" GridPane.rowIndex="0" 
+                               styleClass="field-medical" style="-fx-pref-width: 220;"/>
+                    
+                    <Label text="⏰ Heure (HH:mm):" GridPane.columnIndex="2" GridPane.rowIndex="0" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="heureRdvField" GridPane.columnIndex="3" GridPane.rowIndex="0" 
+                               promptText="14:30" styleClass="field-medical" style="-fx-pref-width: 180;"/>
+                    
+                    <Label text="👤 Patient:" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="patientComboBox" GridPane.columnIndex="1" GridPane.rowIndex="1" 
+                             styleClass="field-medical" prefWidth="220" promptText="Sélectionnez un patient"/>
+                    
+                    <Label text="👨‍⚕️ Médecin:" GridPane.columnIndex="2" GridPane.rowIndex="1" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="medecinComboBox" GridPane.columnIndex="3" GridPane.rowIndex="1" 
+                             styleClass="field-medical" prefWidth="220" promptText="Sélectionnez un médecin"/>
+                    
+                    <Label text="📝 Motif:" GridPane.columnIndex="0" GridPane.rowIndex="2" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="motifField" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.columnSpan="3" 
+                              styleClass="field-medical" prefWidth="400" promptText="Raison de la consultation"/>
+                    
+                    <Label text="🏷️ Statut:" GridPane.columnIndex="0" GridPane.rowIndex="3" style="-fx-font-weight: bold;"/>
+                    <ComboBox fx:id="statutComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3" 
+                             styleClass="field-medical" style="-fx-pref-width: 220;" promptText="Sélectionnez un statut"/>
+                </GridPane>
+                
+                <HBox spacing="15" alignment="CENTER" styleClass="spacing-md">
+                    <padding>
+                        <Insets top="25"/>
+                    </padding>
+                    <Button text="📅 Planifier" onAction="#handlePlanifierRendezVous" 
+                            styleClass="button-gradient-success button-large glow-success"/>
+                    <Button text="✏️ Modifier" onAction="#handleUpdateRendezVous" 
+                            styleClass="button-gradient-warning button-large glow-warning"/>
+                    <Button text="🗑️ Supprimer" onAction="#handleDeleteRendezVous" 
+                            styleClass="button-gradient-danger button-large glow-danger"/>
+                    <Button text="🧹 Effacer" onAction="#clearFields" 
+                            styleClass="button-outline-warning button-large"/>
+                </HBox>
+            </VBox>
+            
+        </VBox>
+    </center>
+    
+</BorderPane>
